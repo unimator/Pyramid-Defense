@@ -28,7 +28,7 @@ $RECYCLE.BIN/
 Clone-of-Unity-*
 *.DS_Store
 #Unity project directory
-/[Ll]ibrary/
+[Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
