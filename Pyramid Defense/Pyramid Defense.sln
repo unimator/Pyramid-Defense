@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pyramid Defense", "Pyramid 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pyramid Defense.Editor.Plugins", "Pyramid Defense.Editor.Plugins.csproj", "{5D876AB8-3B35-EF98-B176-F8DBBCFEE0BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pyramid Defense.Common", "..\Pyramid Defense.Common\Pyramid Defense.Common.csproj", "{5DBF31E0-CCB0-4062-B5EC-78061448DAD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{5D876AB8-3B35-EF98-B176-F8DBBCFEE0BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D876AB8-3B35-EF98-B176-F8DBBCFEE0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D876AB8-3B35-EF98-B176-F8DBBCFEE0BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DBF31E0-CCB0-4062-B5EC-78061448DAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DBF31E0-CCB0-4062-B5EC-78061448DAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DBF31E0-CCB0-4062-B5EC-78061448DAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DBF31E0-CCB0-4062-B5EC-78061448DAD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

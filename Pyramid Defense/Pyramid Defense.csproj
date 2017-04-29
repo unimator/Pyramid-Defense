@@ -73,6 +73,9 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="Pyramid Defense.Common">
+      <HintPath>Assets\Data\Plugins\Pyramid Defense.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Pyramid Defense.Plugins.csproj">
@@ -81,9 +84,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AreaGrid.cs" />
+    <Compile Include="Assets\CameraMovement.cs" />
     <Compile Include="Assets\Enemy.cs" />
     <Compile Include="Assets\Hexagon.cs" />
     <Compile Include="Assets\QuitGame.cs" />
+    <Compile Include="Assets\Resources\Prefabs\HexagonBasic.cs" />
+    <Compile Include="Assets\Resources\Prefabs\MapGrid.cs" />
+    <Compile Include="Assets\RestartScene.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -93,6 +101,7 @@
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\StartGame.cs" />
+    <Compile Include="Assets\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
