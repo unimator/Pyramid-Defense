@@ -1,64 +1,74 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Xml;
-using Color = System.Drawing.Color;
 
 namespace Pyramid_Defense.Common
 {
-    public enum MapElement
-    {
-        None,
-        Start,
-        Finish,
-        StandardHex
-    }
-
     public class MapGridStructure
     {
-        public int SizeX { get; private set; }
-        public int SizeZ { get; private set; }
-        public string MapName { get; private set; }
-        public string DataFileName { get; private set; }
-        public float OffsetX { get; private set; }
-        public float OffsetZ { get; private set; }
-        public MapElement[,] MapStructure { get; private set; }
-
+        private Dictionary<string, string> xmlAttributes = new Dictionary<string, string>();
         private readonly string _xmlFileName;
 
-        private Dictionary<string, string> xmlAttributes = new Dictionary<string, string>();
+        public int SizeX { get; private set; }
+
+        public int SizeZ { get; private set; }
+
+        public string MapName { get; private set; }
+
+        public string DataFileName { get; private set; }
+
+        public float OffsetX { get; private set; }
+
+        public float OffsetZ { get; private set; }
+
+        public MapElement[,] MapStructure { get; private set; }
 
         public MapGridStructure(string xmlFileName)
         {
-            _xmlFileName = xmlFileName;
-            ParseLevelInfoXml();
-            LoadMapStructure();
+            this._xmlFileName = xmlFileName;
+            this.ParseLevelInfoXml();
+            this.LoadMapStructure();
         }
 
         private void LoadMapStructure()
         {
-            Bitmap bitmap = new Bitmap(DataFileName);
-            SizeX = bitmap.Width;
-            SizeZ = bitmap.Height;
-            MapStructure = new MapElement[SizeX, SizeZ];
-            for (int x = 0; x < SizeX; ++x)
+            Bitmap bitmap = new Bitmap(this.DataFileName);
+            this.SizeX = bitmap.Width;
+            this.SizeZ = bitmap.Height;
+            this.MapStructure = new MapElement[this.SizeX, this.SizeZ];
+            for (int x = 0; x < this.SizeX; ++x)
             {
-                for (int z = 0; z < SizeZ; ++z)
+                for (int y = 0; y < this.SizeZ; ++y)
                 {
-                    Color pixel = bitmap.GetPixel(x, z);
-
-                    if (pixel.ToArgb().Equals(Color.Black.ToArgb()))
+                    Color pixel = bitmap.GetPixel(x, y);
+                    int argb = pixel.ToArgb();
+                    if (argb.Equals(Color.Black.ToArgb()))
                     {
-                        MapStructure[x, z] = MapElement.StandardHex;
-                    } else if (pixel.ToArgb().Equals(Color.White.ToArgb()))
+                        this.MapStructure[x, y] = MapElement.StandardHex;
+                    }
+                    else
                     {
-                        MapStructure[x, z] = MapElement.None;
-                    } else if (pixel.ToArgb().Equals(Color.Blue.ToArgb()))
-                    {
-                        MapStructure[x, z] = MapElement.Finish;
-                    } else if (pixel.ToArgb().Equals(Color.Red.ToArgb()))
-                    {
-                        MapStructure[x, z] = MapElement.Start;
+                        argb = pixel.ToArgb();
+                        if (argb.Equals(Color.White.ToArgb()))
+                        {
+                            this.MapStructure[x, y] = MapElement.None;
+                        }
+                        else
+                        {
+                            argb = pixel.ToArgb();
+                            if (argb.Equals(Color.Blue.ToArgb()))
+                            {
+                                this.MapStructure[x, y] = MapElement.Finish;
+                            }
+                            else
+                            {
+                                argb = pixel.ToArgb();
+                                if (argb.Equals(Color.Red.ToArgb()))
+                                    this.MapStructure[x, y] = MapElement.Start;
+                            }
+                        }
                     }
                 }
             }
@@ -66,35 +76,20 @@ namespace Pyramid_Defense.Common
 
         private void ParseLevelInfoXml()
         {
-            var rawXmlData = File.ReadAllText(_xmlFileName);
-
+            string xml = File.ReadAllText(this._xmlFileName);
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(rawXmlData);
-
-            foreach (XmlNode node in xmlDocument.GetElementsByTagName("root").Item(0).ChildNodes)
-            {
-                xmlAttributes.Add(node.Name, node.InnerText.Trim());
-            }
-
-            if (xmlAttributes.ContainsKey("mapname"))
-            {
-                MapName = xmlAttributes["mapname"];
-            }
-
-            if (xmlAttributes.ContainsKey("data_file_name"))
-            {
-                DataFileName = xmlAttributes["data_file_name"];
-            }
-
-            if (xmlAttributes.ContainsKey("offset_x"))
-            {
-                OffsetX = float.Parse(xmlAttributes["offset_x"]);
-            }
-
-            if (xmlAttributes.ContainsKey("offset_z"))
-            {
-                OffsetZ = float.Parse(xmlAttributes["offset_z"]);
-            }
+            xmlDocument.LoadXml(xml);
+            foreach (XmlNode childNode in xmlDocument.GetElementsByTagName("root").Item(0).ChildNodes)
+                this.xmlAttributes.Add(childNode.Name, childNode.InnerText.Trim());
+            if (this.xmlAttributes.ContainsKey("mapname"))
+                this.MapName = this.xmlAttributes["mapname"];
+            if (this.xmlAttributes.ContainsKey("data_file_name"))
+                this.DataFileName = this.xmlAttributes["data_file_name"];
+            if (this.xmlAttributes.ContainsKey("offset_x"))
+                this.OffsetX = float.Parse(this.xmlAttributes["offset_x"]);
+            if (!this.xmlAttributes.ContainsKey("offset_z"))
+                return;
+            this.OffsetZ = float.Parse(this.xmlAttributes["offset_z"]);
         }
     }
 }

@@ -8,7 +8,7 @@ public class MapGrid : MonoBehaviour
     private MapGridStructure _mapGridStructure;
 
 	// Use this for initialization
-	void Start () {
+	void Start () { 
         _mapGridStructure = new MapGridStructure(LevelXmlFileName);
 
 	    var areaGridPlayerA = GameObject.Find("AreaGridPlayerA").GetComponent<AreaGrid>();

@@ -1,6 +1,6 @@
 <root>
 	<mapname>Level 1</mapname>
-	<data_file_name>Maps\level1.bmp</data_file_name>
-	<offset_x>-20</offset_x>
-	<offset_z>-20</offset_z>
+	<data_file_name>Maps/level1.bmp</data_file_name>
+	<offset_x>2</offset_x>
+	<offset_z>2</offset_z>
 </root>
